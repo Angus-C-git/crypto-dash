@@ -2,7 +2,7 @@
 
 # local env
 .env
-
+.idea/
 
 # dependencies
 /node_modules
