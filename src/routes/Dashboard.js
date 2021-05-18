@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import DataCard from '../components/DataCard';
 import DataSpan from '../components/DataSpan';
