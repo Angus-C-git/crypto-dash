@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Logo from '../static/logo.svg';
 
-import {useHistory, Redirect, BrowserRouter} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -57,8 +57,8 @@ export default function NavBar(props) {
 		history.push('/dashboard');
 	};
 
-	const fiddle = () => {
-		history.push('/fiddle');
+	const profile = () => {
+		history.push('/profile');
 	};
 
 
@@ -77,7 +77,7 @@ export default function NavBar(props) {
 					<Typography alt="CryptoDash" onClick={() => returnHome()} variant="h6" className={classes.title}>
 						CryptoDash
 					</Typography>
-					<Button alt="fiddle" id="fiddle" onClick={fiddle} color="inherit">Fiddle</Button>
+					<Button alt="profile" id="profile" onClick={profile} color="inherit">Profile</Button>
 					<Button alt="Logout" id="logout" onClick={logout} color="inherit">Logout</Button>
 				</Toolbar>
 			</AppBar>

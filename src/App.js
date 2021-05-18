@@ -2,7 +2,7 @@ import React from 'react';
 import './css/App.css';
 import NavBar from './components/NavBar';
 import Dashboard from './routes/Dashboard';
-import Fiddle from './routes/Fiddle';
+import Profile from './routes/Profile';
 import Login from './routes/Login';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
@@ -31,8 +31,8 @@ function App() {
                         ? <Redirect to="/dashboard" />
                         : <Redirect to="/login" />}
                 </Route>
-                <Route path="/fiddle">
-                    <Fiddle />
+                <Route path="/profile">
+                    <Profile />
                 </Route>
                 <Route path="/login">
                     <Login token={token}/>

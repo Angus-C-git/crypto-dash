@@ -2,12 +2,12 @@ import React from 'react';
 // import logo from "./static/logo.svg";
 // import { BrowserRouter as Router, Link } from "react-router-dom";
 
-export default function Fiddle() {
+export default function Profile() {
 
 	return (
-		<h1>Fiddle</h1>
+		<h1>Profile</h1>
 	)
 }
 
-Fiddle.propTypes = {
+Profile.propTypes = {
 };
