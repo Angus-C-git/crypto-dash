@@ -1,0 +1,30 @@
+.root {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.menuButton {
+    /*marginRight: theme.spacing(2),*/
+}
+
+.title {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.Banner {
+    background-color: black;
+    color: black;
+}
+
+.s_logo {
+    width: 15px;
+    height: 75px;
+}
+
+.customImg {
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    cursor: pointer;
+}

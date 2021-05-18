@@ -1,3 +1,11 @@
+:root {
+  --primary-bg: #0b0e11;
+  --banner-color: #151a21;
+  --alt-banner: #242c37;
+  --primary-text: #dee3ea;
+  --banner-text: #fd4d4d;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +13,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-text);
+  margin-left: 1%;
 }
 
 code {
