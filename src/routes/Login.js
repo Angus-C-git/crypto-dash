@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Redirect, useHistory } from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import { Button, TextField, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import {makeStyles} from "@material-ui/core/styles";
 import Logo from '../static/logo.svg';
-
-const BASE_URL = 'https://null/api';
+import { gql, useMutation } from '@apollo/client';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,26 +45,47 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+
+const LOGIN = gql`
+    mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password){
+            message
+        }
+    }
+`;
+
+
+
+
 export default function Login(props) {
-	const { token, setToken } = props;
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [error, setError] = React.useState(undefined);
 	const classes = useStyles();
 	const history = useHistory();
+	const [ login ] = useMutation(LOGIN);
 
-	if (token) {
-		console.log("TOKEN:", token);
-		console.log("REDIRECTING TO DASH");
-		// history.push('/dashboard');
-		return <Redirect to="/dashboard"/>;
-	}
+	const [
+		redirectToDash,
+		setRedirectToDash
+	] = React.useState(false);
+
+	// if (cookies.get('name')) {
+	// 	console.log("AUTH:", cookies.get('name'));
+	// 	console.log("REDIRECTING TO DASH");
+	// 	// history.push('/dashboard');
+	// 	return <Redirect to="/dashboard"/>;
+	// }
+
+
+
 
 	// Similar to Registration - submits all fields
-	const submit = async (e) => {
+	const handleLogin = async (e) => {
 
-		console.log("TMP LOGIN FUNCTION ISSUING TOKEN ...");
-		localStorage.setItem('token', 'TMP_TOKEN');
+
+		//console.log("TMP LOGIN FUNCTION ISSUING TOKEN ...");
+		//localStorage.setItem('token', 'TMP_TOKEN');
 
 		e.preventDefault();
 		try {
@@ -74,36 +93,61 @@ export default function Login(props) {
 				setError('Text fields cannot be empty!');
 				return;
 			}
-			const response = await fetch(`${BASE_URL}/user/login`, {
-				body: JSON.stringify({
-					email,
-					password,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				method: 'POST',
+
+			await login({variables: {email: email, password: password}}).then((data) => {
+				const res = data.data.login[0].message;
+				console.log("DATA ::",res);
+
+				if (res !== 'success') {
+					setError(res);
+					return null;
+				}
+
+				setError(null); // hide any previous errors
+				// return <Redirect to='/dashboard' />;
+				setRedirectToDash(true);
+
+
+			}).catch((err) => {
+				console.error('[>>] Login failed', err);
+				setError(`Incorrect Credentials :: ${err}`);
 			});
-			const responseData = await response.json();
-			setError(responseData.error);
-			if (response.status === 200) {
-				setToken(responseData.token);
-				localStorage.setItem('token', responseData.token);
-			}
+
+
+			// const response = await fetch(`${BASE_URL}`, {
+			// 	// 	body: JSON.stringify({
+			// 	// 		email,
+			// 	// 		password,
+			// 	// 	}),
+			// 	// 	headers: {
+			// 	// 		'Content-Type': 'application/json',
+			// 	// 	},
+			// 	// 	method: 'POST',
+			// 	// });
+			// 	// const responseData = await response.json();
+			// 	// setError(responseData.error);
+			// 	// if (response.status === 200) {
+			// 	// 	setToken(responseData.token);
+			// 	// 	localStorage.setItem('token', responseData.token);
+			// 	// }
+			// }
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	if (redirectToDash)
+		return <Redirect to="/dashboard" />;
 
 
 
 	return (
 		<>
 			<h1 className={classes.title}>
-				<img src={Logo} alt={"Logo"} class={classes.img}/> CryptoDash
+				<img src={Logo} alt={"Logo"} className={classes.img}/> CryptoDash
 			</h1>
 			<div className={classes.root}>
-				<form onSubmit={submit} className={classes.formFields}>
+				<div className={classes.formFields}>
 					<Typography variant="h5">Log in</Typography>
 					<TextField
 						color={classes.formFields}
@@ -125,8 +169,8 @@ export default function Login(props) {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					{error && <Alert severity="error">{error}</Alert>}
-					<Button alt="login-submit" id="login-submit" variant="contained" color="primary" type="submit" fullWidth>Log in</Button>
-				</form>
+					<Button alt="login-submit" onClick={handleLogin} variant="contained" color="primary" fullWidth>Log in</Button>
+				</div>
 				<br/>
 				{/*<div className="switch-signing-in">*/}
 				{/*	Don&#39;t have an account?*/}
@@ -143,6 +187,6 @@ export default function Login(props) {
 }
 
 Login.propTypes = {
-	token: PropTypes.string.isRequired
+	// token: PropTypes.string.isRequired
 	// setToken: PropTypes.func.isRequired,
 };

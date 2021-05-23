@@ -4,11 +4,12 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LineDatagram from "../components/LineDatagram";
+import { useQuery, gql } from '@apollo/client';
 
 
 const useStyles = makeStyles({
 	root: {
-		minWidth: 1020,
+		minWidth: 1200,
 		width: '85%',
 		//maxWidth: 1600,
 		backgroundColor: '#242c37',
@@ -24,33 +25,35 @@ const useStyles = makeStyles({
 	},
 });
 
+
+const INVESTMENT_HISTORY = gql`
+    query {
+        investment_history {
+            month
+            buy
+            sell
+        }
+    }
+`;
+
+
 export default function LargeOutlinedCard(props) {
 	const { CardTitle } = props;
 	const classes = useStyles();
+	let chartData;
 
-	// ::::::::::::::: DATA STRUCTURE :::::::::::::::
-	const data = [
-		{
-			name: 'January',
-			NetWorth: 0,
-		},
-		{
-			name: 'February',
-			NetWorth: 973,
-		},
-		{
-			name: 'March',
-			NetWorth: 775,
-		},
-		{
-			name: 'April',
-			NetWorth: 1000,
-		},
-		{
-			name: 'May',
-			NetWorth: 1500,
-		},
-	];
+	const { loading, error, data } = useQuery(INVESTMENT_HISTORY);
+
+	if (loading) return <p>Loading...</p>;
+	if (error || !data) {
+		console.log(error);
+		chartData = null;
+	}
+
+
+	if (data) {
+		chartData = data.investment_history;
+	}
 
 	return (
 		<Card className={classes.root} variant="outlined">
@@ -58,7 +61,7 @@ export default function LargeOutlinedCard(props) {
 				<Typography variant="h5" component="h2" className={classes.title}>
 					{CardTitle}
 				</Typography>
-				<LineDatagram data={data}/>
+				<LineDatagram data={chartData}/>
 			</CardContent>
 		</Card>
 	);

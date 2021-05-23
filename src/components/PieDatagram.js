@@ -1,20 +1,22 @@
 import React, { useCallback, useState } from "react";
 import { PieChart, Pie, Sector } from 'recharts';
 
-const data = [
-	{ name: 'Investment', value: 500.11 },
-	{ name: 'Net Worth', value: 800.77 },
-];
+// ::::::::::::::: DATA STRUCTURE :::::::::::::::
 
-const profData = [
-	{ name: 'BTC', value: 399.01 },
-	{ name: 'DOGE', value: 32.77 },
-	{ name: 'XRP', value: 149.44 },
-	{ name: 'THEA', value: 743.19 },
-	{ name: 'ETH', value: 563.86 },
-	{ name: 'HIVE', value: 45.90 },
-	{ name: 'SHIB', value: 24.00 },
-];
+// const data = [
+// 	{ name: 'Investment', value: 500.11 },
+// 	{ name: 'Net Worth', value: 800.77 },
+// ];
+//
+// const profData = [
+// 	{ name: 'BTC', value: 399.01 },
+// 	{ name: 'DOGE', value: 32.77 },
+// 	{ name: 'XRP', value: 149.44 },
+// 	{ name: 'THEA', value: 743.19 },
+// 	{ name: 'ETH', value: 563.86 },
+// 	{ name: 'HIVE', value: 45.90 },
+// 	{ name: 'SHIB', value: 24.00 },
+// ];
 
 const renderActiveShape = (props) => {
 	const RADIAN = Math.PI / 180;
@@ -49,7 +51,7 @@ const renderActiveShape = (props) => {
 				startAngle={startAngle}
 				endAngle={endAngle}
 				innerRadius={outerRadius + 6}
-				outerRadius={outerRadius + 9}
+				outerRadius={outerRadius + 10}
 				fill={fill}
 			/>
 			<path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
@@ -63,7 +65,7 @@ const renderActiveShape = (props) => {
 };
 
 export default function PieDatagram(props) {
-	const { dataType } =props;
+	const { data } = props;
 	const [activeIndex, setActiveIndex] = useState(0);
 	const onPieEnter = useCallback(
 		(_, index) => {
@@ -77,7 +79,7 @@ export default function PieDatagram(props) {
 			<Pie
 				activeIndex={activeIndex}
 				activeShape={renderActiveShape}
-				data={dataType === 'profile' ? profData : data}
+				data={data}
 				cx={220}
 				cy={125}
 				innerRadius={50}

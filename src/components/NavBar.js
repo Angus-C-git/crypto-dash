@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Logo from '../static/logo.svg';
 
 import { useHistory } from 'react-router-dom';
+import {gql, useMutation} from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -38,19 +38,43 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+
+const LOGOUT = gql`
+    mutation mutation {
+        logout
+    }
+`;
+
+
 export default function NavBar(props) {
-	let { token } = props;
+	// let { token } = props;
 	const classes = useStyles();
 	const history = useHistory();
+	const [ logout ] = useMutation(LOGOUT);
+
+	const [
+		redirectToLogin,
+		setRedirectToLogin
+	] = React.useState(false);
+
 
 	/**
 	 * TMP logout method deletes local storage
 	 * token.
 	 * */
-	const logout = async () => {
-		await localStorage.clear();
-		token = null;
-		window.location = '/login'; // DISGUSTING HACK
+	const handleLogout = async (e) => {
+		e.preventDefault();
+		try {
+			await logout().then((res) => {
+				if (res.data.logout)
+					setRedirectToLogin(true);
+			}).catch(err => {
+				console.error(err);
+			});
+		} catch (err) {
+			console.error('[>>] Logout failed', err);
+		}
+
 	};
 
 	const returnHome = () => {
@@ -58,16 +82,13 @@ export default function NavBar(props) {
 	};
 
 	const profile = () => {
-		history.push('/profile');
+		//history.push('/profile');
+		window.location = '/profile';
 	};
 
-
-	// If not logged in, no need to show nav bar
-	if (!token) {
-		console.log("TOKEN WAS NULL");
-		return null;
-	}
-
+	if (redirectToLogin)
+		window.location = '/login';
+		//return <Redirect to='/login' />;
 
 	return (
 		<div className={classes.root}>
@@ -78,7 +99,7 @@ export default function NavBar(props) {
 						CryptoDash
 					</Typography>
 					<Button alt="profile" id="profile" onClick={profile} color="inherit">Profile</Button>
-					<Button alt="Logout" id="logout" onClick={logout} color="inherit">Logout</Button>
+					<Button alt="Logout" id="logout" onClick={handleLogout} color="inherit">Logout</Button>
 				</Toolbar>
 			</AppBar>
 		</div>
@@ -86,5 +107,5 @@ export default function NavBar(props) {
 }
 
 NavBar.propTypes = {
-	token: PropTypes.string.isRequired,
+	// token: PropTypes.string.isRequired,
 };

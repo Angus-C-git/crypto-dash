@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import DataCard from '../components/DataCard';
 import DataSpan from '../components/DataSpan';
 
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import NavBar from "../components/NavBar";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,13 +22,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard(props) {
 	//const [spacing] = React.useState(10);
 	const classes = useStyles();
-	const { token } = props;
-
-	if (!token)
-		return <Redirect to="/login" />;
+	// const { token } = props;
+	//
+	// // Get profile data here ?
+	//
+	// if (!token)
+	// 	return <Redirect to="/login" />;
 
 	return (
 		<BrowserRouter>
+			<NavBar />
 			<div>
 				<h2>Holdings Overview</h2>
 			</div>
@@ -45,7 +49,7 @@ export default function Dashboard(props) {
 				</Grid>
 				<Grid item xs={12} spacing={3}>
 					<Grid container justify="center">
-						<DataSpan CardTitle={"Net Worth Overtime"}/>
+						<DataSpan CardTitle={"Buys Vs Sells Overtime"}/>
 					</Grid>
 				</Grid>
 			</Grid>
@@ -55,5 +59,5 @@ export default function Dashboard(props) {
 }
 
 Dashboard.propTypes = {
-	token: PropTypes.string.isRequired
+	// token: PropTypes.string.isRequired
 };

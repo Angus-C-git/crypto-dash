@@ -6,9 +6,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 export default function LineDatagram(props) {
 
 	return (
-		// <ResponsiveContainer width="100%" height="100%">
 		<LineChart
-			width={1000}
+			width={1100}
 			height={300}
 			data={props.data}
 			margin={{
@@ -19,12 +18,12 @@ export default function LineDatagram(props) {
 			}}
 		>
 			<CartesianGrid strokeDasharray="3 3" />
-			<XAxis dataKey="name" />
+			<XAxis dataKey="month" />
 			<YAxis />
 			<Tooltip />
 			<Legend />
-			<Line type="monotone" dataKey="NetWorth" stroke="#8884d8" activeDot={{ r: 8 }} />
+			<Line type="monotone" dataKey="buy" stroke="#8884d8" activeDot={{ r: 8 }} />
+			<Line type="monotone" dataKey="sell" stroke="#82ca9d" />
 		</LineChart>
-		// </ResponsiveContainer>
 	);
 }

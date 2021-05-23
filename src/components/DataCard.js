@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import Logo from "../static/arrow-right.svg";
 import PieDatagram from './PieDatagram';
 
+
+import { useQuery, gql } from '@apollo/client';
+
 const useStyles = makeStyles({
 	root: {
 		minWidth: 465,
@@ -35,10 +38,66 @@ const useStyles = makeStyles({
 	},
 });
 
+
+const WALLET = gql`
+    query {
+        wallet {
+            total
+            holdings {
+                name
+                value
+            }
+        }
+    }
+`;
+
+const POSTURE = gql`
+    query {
+		posture {
+			profit
+			invest
+			worth
+		}
+	} 
+`;
+
+
+
 export default function DataCard(props) {
-	// const {CardTitle} = props;
 	const classes = useStyles();
-	const profit = 200.48;			// TODO: Pull from function
+	let total;
+	let chartData;
+
+	let QUERY = (props.dataType === 'profile') ? WALLET : POSTURE;
+
+	const { loading, error, data } = useQuery(QUERY);
+
+	if (loading) return <p>Loading...</p>;
+	if (error) {
+		console.log(error);
+		return <p>Error :(</p>;
+	}
+
+	// TMP
+	if (!data.posture && !data.wallet && !data.transaction_history)
+		return window.location = '/login';
+
+	if (data && props.dataType !== 'profile') {
+		total = data.posture.profit;
+		chartData = [
+			{
+				name: "Investment",
+				value: data.posture.invest
+			},
+			{
+				name: "Worth",
+				value: data.posture.worth
+			}
+		];
+	} else {
+		total = data.wallet.total;
+		chartData = data.wallet.holdings;
+	}
 
 	return (
 		<Card className={classes.root} variant="outlined">
@@ -47,10 +106,10 @@ export default function DataCard(props) {
 					{props.CardTitle}
 				</Typography>
 
-				<PieDatagram dataType={props.dataType}/>
+				<PieDatagram data={chartData}/>
 
 				<Typography className={classes.data} color="textSecondary">
-					${profit}
+					${total}
 				</Typography>
 			</CardContent>
 			<CardActions>
