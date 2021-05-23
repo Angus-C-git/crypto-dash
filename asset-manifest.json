@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.7bebd54b.chunk.css",
-    "main.js": "/static/js/main.3d74d17b.chunk.js",
-    "main.js.map": "/static/js/main.3d74d17b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4738f955.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4738f955.js.map",
-    "static/js/2.dd359176.chunk.js": "/static/js/2.dd359176.chunk.js",
-    "static/js/2.dd359176.chunk.js.map": "/static/js/2.dd359176.chunk.js.map",
-    "static/js/3.abd5b05e.chunk.js": "/static/js/3.abd5b05e.chunk.js",
-    "static/js/3.abd5b05e.chunk.js.map": "/static/js/3.abd5b05e.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.7bebd54b.chunk.css.map": "/static/css/main.7bebd54b.chunk.css.map",
-    "static/js/2.dd359176.chunk.js.LICENSE.txt": "/static/js/2.dd359176.chunk.js.LICENSE.txt",
-    "static/media/arrow-right.6a2e5d52.svg": "/static/media/arrow-right.6a2e5d52.svg",
-    "static/media/logo.c10ba86a.svg": "/static/media/logo.c10ba86a.svg"
+    "main.css": "/crypto-dash/static/css/main.7bebd54b.chunk.css",
+    "main.js": "/crypto-dash/static/js/main.3d74d17b.chunk.js",
+    "main.js.map": "/crypto-dash/static/js/main.3d74d17b.chunk.js.map",
+    "runtime-main.js": "/crypto-dash/static/js/runtime-main.4ea7e7bb.js",
+    "runtime-main.js.map": "/crypto-dash/static/js/runtime-main.4ea7e7bb.js.map",
+    "static/js/2.dd359176.chunk.js": "/crypto-dash/static/js/2.dd359176.chunk.js",
+    "static/js/2.dd359176.chunk.js.map": "/crypto-dash/static/js/2.dd359176.chunk.js.map",
+    "static/js/3.abd5b05e.chunk.js": "/crypto-dash/static/js/3.abd5b05e.chunk.js",
+    "static/js/3.abd5b05e.chunk.js.map": "/crypto-dash/static/js/3.abd5b05e.chunk.js.map",
+    "index.html": "/crypto-dash/index.html",
+    "static/css/main.7bebd54b.chunk.css.map": "/crypto-dash/static/css/main.7bebd54b.chunk.css.map",
+    "static/js/2.dd359176.chunk.js.LICENSE.txt": "/crypto-dash/static/js/2.dd359176.chunk.js.LICENSE.txt",
+    "static/media/arrow-right.6a2e5d52.svg": "/crypto-dash/static/media/arrow-right.6a2e5d52.svg",
+    "static/media/logo.c10ba86a.svg": "/crypto-dash/static/media/logo.c10ba86a.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4738f955.js",
+    "static/js/runtime-main.4ea7e7bb.js",
     "static/js/2.dd359176.chunk.js",
     "static/css/main.7bebd54b.chunk.css",
     "static/js/main.3d74d17b.chunk.js"
