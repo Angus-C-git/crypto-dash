@@ -16,6 +16,7 @@ import { useQuery, gql } from '@apollo/client';
 const useStyles = makeStyles({
 	root: {
 		minWidth: 465,
+		minHeight: 280,
 		backgroundColor: '#242c37',
 		borderRadius: 25,
 		marginLeft: '10%',

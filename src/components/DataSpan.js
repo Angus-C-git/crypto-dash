@@ -12,6 +12,7 @@ import {css} from "@emotion/react";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 1200,
+		minHeight: 300,
 		width: '85%',
 		//maxWidth: 1600,
 		backgroundColor: '#242c37',
