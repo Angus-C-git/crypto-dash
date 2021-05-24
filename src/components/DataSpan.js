@@ -12,9 +12,7 @@ import {css} from "@emotion/react";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 1200,
-		minHeight: 395,
 		width: '85%',
-		//maxWidth: 1600,
 		backgroundColor: '#242c37',
 		borderRadius: 25,
 		marginLeft: '15%',
@@ -31,8 +29,8 @@ const useStyles = makeStyles({
 
 const override = css`
   display: block;
-  margin: 25% auto;
-  border-color: red;
+  margin: 10% auto;
+  border-color: #fd4d4d;
 `;
 
 
