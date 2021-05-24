@@ -11,7 +11,7 @@ import { CookiesProvider } from 'react-cookie';
 
 // TODO: redirect on lack of auth token
 const client = new ApolloClient({
-    uri: 'https://crypto-dash-api.herokuapp.com/',
+    uri: 'https://crypto-dash-api.herokuapp.com',
     // uri: 'http://localhost:2048/',
     cache: new InMemoryCache(),
     credentials: 'include'

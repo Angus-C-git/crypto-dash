@@ -1,8 +1,8 @@
 import React from 'react';
-import {Redirect, useHistory} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Button, TextField, Typography } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Logo from '../static/logo.svg';
 import { gql, useMutation } from '@apollo/client';
 
@@ -55,14 +55,11 @@ const LOGIN = gql`
 `;
 
 
-
-
 export default function Login(props) {
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [error, setError] = React.useState(undefined);
 	const classes = useStyles();
-	const history = useHistory();
 	const [ login ] = useMutation(LOGIN);
 
 	const [
@@ -70,22 +67,8 @@ export default function Login(props) {
 		setRedirectToDash
 	] = React.useState(false);
 
-	// if (cookies.get('name')) {
-	// 	console.log("AUTH:", cookies.get('name'));
-	// 	console.log("REDIRECTING TO DASH");
-	// 	// history.push('/dashboard');
-	// 	return <Redirect to="/dashboard"/>;
-	// }
 
-
-
-
-	// Similar to Registration - submits all fields
 	const handleLogin = async (e) => {
-
-
-		//console.log("TMP LOGIN FUNCTION ISSUING TOKEN ...");
-		//localStorage.setItem('token', 'TMP_TOKEN');
 
 		e.preventDefault();
 		try {
@@ -104,33 +87,13 @@ export default function Login(props) {
 				}
 
 				setError(null); // hide any previous errors
-				// return <Redirect to='/dashboard' />;
 				setRedirectToDash(true);
-
 
 			}).catch((err) => {
 				console.error('[>>] Login failed', err);
-				setError(`Incorrect Credentials :: ${err}`);
+				setError(`Incorrect Credentials`);
 			});
 
-
-			// const response = await fetch(`${BASE_URL}`, {
-			// 	// 	body: JSON.stringify({
-			// 	// 		email,
-			// 	// 		password,
-			// 	// 	}),
-			// 	// 	headers: {
-			// 	// 		'Content-Type': 'application/json',
-			// 	// 	},
-			// 	// 	method: 'POST',
-			// 	// });
-			// 	// const responseData = await response.json();
-			// 	// setError(responseData.error);
-			// 	// if (response.status === 200) {
-			// 	// 	setToken(responseData.token);
-			// 	// 	localStorage.setItem('token', responseData.token);
-			// 	// }
-			// }
 		} catch (err) {
 			console.log(err);
 		}
@@ -138,7 +101,6 @@ export default function Login(props) {
 
 	if (redirectToDash)
 		return <Redirect to="/dashboard" />;
-
 
 
 	return (
@@ -172,21 +134,10 @@ export default function Login(props) {
 					<Button alt="login-submit" onClick={handleLogin} variant="contained" color="primary" fullWidth>Log in</Button>
 				</div>
 				<br/>
-				{/*<div className="switch-signing-in">*/}
-				{/*	Don&#39;t have an account?*/}
-				{/*	{'    '}*/}
-				{/*</div>*/}
-				{/*<div>*/}
-				{/*	<Button alt="register here" id="register-here" onClick={() => history.push('/register')} variant="outlined">Register here</Button>*/}
-				{/*	<Button alt="forgot password" id="forgot-pass" onClick={() => history.push('/reset')} variant="outlined">Forgot Password</Button>*/}
-				{/*</div>*/}
-
 			</div>
 		</>
 	);
 }
 
 Login.propTypes = {
-	// token: PropTypes.string.isRequired
-	// setToken: PropTypes.func.isRequired,
 };

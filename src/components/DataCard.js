@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 import Logo from "../static/arrow-right.svg";
 import PieDatagram from './PieDatagram';
-
+import { css } from "@emotion/react";
+import HashLoader from "react-spinners/HashLoader";
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -38,6 +39,12 @@ const useStyles = makeStyles({
 	},
 });
 
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const WALLET = gql`
     query {
@@ -72,10 +79,16 @@ export default function DataCard(props) {
 
 	const { loading, error, data } = useQuery(QUERY);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return (
+		<Card className={classes.root} variant="outlined">
+			<CardContent>
+				<HashLoader css={override} size={150} color={"#fd4d4d"} speedMultiplier={1.5}/>
+			</CardContent>
+		</Card>
+	);
 	if (error) {
 		console.log(error);
-		return <p>Error :(</p>;
+		return null;
 	}
 
 	// TMP

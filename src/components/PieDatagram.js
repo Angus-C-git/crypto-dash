@@ -1,22 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { PieChart, Pie, Sector } from 'recharts';
 
-// ::::::::::::::: DATA STRUCTURE :::::::::::::::
-
-// const data = [
-// 	{ name: 'Investment', value: 500.11 },
-// 	{ name: 'Net Worth', value: 800.77 },
-// ];
-//
-// const profData = [
-// 	{ name: 'BTC', value: 399.01 },
-// 	{ name: 'DOGE', value: 32.77 },
-// 	{ name: 'XRP', value: 149.44 },
-// 	{ name: 'THEA', value: 743.19 },
-// 	{ name: 'ETH', value: 563.86 },
-// 	{ name: 'HIVE', value: 45.90 },
-// 	{ name: 'SHIB', value: 24.00 },
-// ];
 
 const renderActiveShape = (props) => {
 	const RADIAN = Math.PI / 180;

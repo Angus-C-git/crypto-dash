@@ -5,6 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LineDatagram from "../components/LineDatagram";
 import { useQuery, gql } from '@apollo/client';
+import HashLoader from "react-spinners/HashLoader";
+import {css} from "@emotion/react";
 
 
 const useStyles = makeStyles({
@@ -26,6 +28,13 @@ const useStyles = makeStyles({
 });
 
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
+
+
 const INVESTMENT_HISTORY = gql`
     query {
         investment_history {
@@ -44,10 +53,18 @@ export default function LargeOutlinedCard(props) {
 
 	const { loading, error, data } = useQuery(INVESTMENT_HISTORY);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return (
+		<Card className={classes.root} variant="outlined">
+			<CardContent>
+				<HashLoader css={override} size={150} color={"#fd4d4d"} speedMultiplier={1.5}/>
+			</CardContent>
+		</Card>
+	);
+
 	if (error || !data) {
 		console.log(error);
 		chartData = null;
+		return <h1>Failed to load ...</h1>;
 	}
 
 
