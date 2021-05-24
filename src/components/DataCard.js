@@ -15,8 +15,8 @@ import { useQuery, gql } from '@apollo/client';
 
 const useStyles = makeStyles({
 	root: {
-		minWidth: 465,
-		minHeight: 280,
+		minWidth: 500,
+		minHeight: 460,
 		backgroundColor: '#242c37',
 		borderRadius: 25,
 		marginLeft: '10%',
@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 	data: {
 		fontSize: 25,
 		marginTop: '4%',
-		// marginLeft: '2%',
 		fontWeight: 'bold',
 		color: '#dee3ea',
 	},
@@ -43,8 +42,8 @@ const useStyles = makeStyles({
 
 const override = css`
   display: block;
-  margin: 0 auto;
-  border-color: red;
+  margin: 25% auto;
+  border-color: #fd4d4d;
 `;
 
 const WALLET = gql`

@@ -12,7 +12,7 @@ import {css} from "@emotion/react";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 1200,
-		minHeight: 300,
+		minHeight: 395,
 		width: '85%',
 		//maxWidth: 1600,
 		backgroundColor: '#242c37',
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
 const override = css`
   display: block;
-  margin: 0 auto;
+  margin: 25% auto;
   border-color: red;
 `;
 
@@ -64,8 +64,7 @@ export default function LargeOutlinedCard(props) {
 
 	if (error || !data) {
 		console.log(error);
-		chartData = null;
-		return <h1>Failed to load ...</h1>;
+		return null;
 	}
 
 
